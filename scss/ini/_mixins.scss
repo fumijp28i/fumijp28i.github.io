@@ -1,0 +1,103 @@
+/*
+
+// mixins.scss
+
+*/
+
+@mixin mp($margin: 0, $padding: 0) {
+  margin: $margin;
+  padding: $padding;
+}
+
+@mixin wh($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+@mixin pd($position: relative, $display: block) {
+  position: $position;
+  display: $display;
+}
+
+@mixin trbl($top: 0, $right: 0, $bottom: 0, $left: 0) {
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin hidden() {
+  @include wh(1px, 1px);
+  @include mp(-1px, 0);
+  @include pd( $position: absolute );
+  @include trbl();
+  border: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+@mixin font($bold: 400, $size: 16px, $line-height: 1.6em, $color: #111111, $align: left) {
+  font-weight: $bold;
+  font-size: $size;
+  line-height: $line-height;
+  color: $color;
+  text-align: $align;
+}
+
+@mixin background-image($dir, $image) {
+  background-image: url("#{$images_dir}/#{$dir}/#{$image}");
+}
+
+@mixin background-hero($image) {
+  background-image: url("#{$images-hero}/#{$image}");
+}
+
+@mixin background($size: cover , $position-x: center, $position-y: 10%) {
+  background-size: $size;
+  overflow: hidden;
+  background-position: #{$position-x} #{$position-y};
+}
+
+@mixin box-shadow($color, $properties...) {
+  box-shadow: $properties rgba($color, 0.12), $properties rgba($color, 0.24);
+}
+
+@mixin stripe($color: #FEF4E2) {
+  background: -webkit-linear-gradient(top left, rgba($color, 0.8) 20%, transparent 20%, transparent 50%, rgba($color, 0.8) 50%, rgba($color, 0.8) 70%, transparent 70%);
+  background: -o-linear-gradient(top left, rgba($color, 0.8) 20%, transparent 20%, transparent 50%, rgba($color, 0.8) 50%, rgba($color, 0.8) 70%, transparent 70%);
+  background: linear-gradient(to bottom right, rgba($color, 0.8) 20%, transparent 20%, transparent 50%, rgba($color, 0.8) 50%, rgba($color, 0.8) 70%, transparent 70%);
+  background-size: 4px 4px;
+}
+
+
+@mixin h1-accent($position: bottom, $color: #888888) { border-#{$position}: solid 5px $color; }
+
+@mixin arrow($size: 1rem, $bold: 0.2rem, $rotate: 45deg, $float: 4px, $color: #888888) {
+  content: '';
+  position: absolute;
+  @include mp(0.2em, 0);
+  width: $size;
+  height: $size;
+  border-right: solid $bold $color;
+  border-bottom: solid $bold $color;
+  border-radius: 0.1em;
+  transform: rotate($rotate) translateX($float) translateY($float);
+  -ms-transform: rotate($rotate) translateX($float) translateY($float);
+  -webkit-transform: rotate($rotate) translateX($float) translateY($float);
+}
+
+@mixin tablet($max-width:1024px) {
+  @media screen and(max-width: $max-width) {
+    @content;
+  }
+}
+@mixin sp-large($max-width:480px) {
+  @media screen and(max-width: $max-width) {
+    @content;
+  }
+}
+@mixin sp-small($max-width:320px) {
+  @media screen and(max-width: $max-width) {
+    @content;
+  }
+}

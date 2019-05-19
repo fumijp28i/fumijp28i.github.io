@@ -1,0 +1,10 @@
+/* ===== extends.scss ===== */
+
+.r-b { margin: 0 8px 0 0 ; }
+.br { display: flex; margin-bottom: 1em; }
+.font-bold { font-weight: bold; }
+.float-right { float: right; }
+.bracketsJpn:before { content: '『'; }
+.bracketsJpn:after { content: '』'; }
+
+%relative { position: relative; }
