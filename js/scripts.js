@@ -43,13 +43,12 @@ function initMap() {
 
 
 // マーカー配置の準備　（①JSONを呼びに行き、ドキュメントに配架）
-  const script = document.createElement("script");
-  script.setAttribute("src", "../js/package.json");
-  document.getElementsByTagName("head")[0].appendChild(script);
+  document.createElement("script").setAttribute("src", "../js/package.json");
+  document.getElementsByTagName("head")[0].appendChild(document.createElement("script"));
 
 // 呼び出し
   window.feed_callback = function(results) {
-      //マップにマーカーを生成
+      // マップにマーカーを生成
       for (var i = 0; i < results.features.length; i++) {
         var coords = results.features[i].geometry.coordinates;
         var latLng = new google.maps.LatLng(coords[1],coords[0]);
@@ -59,9 +58,10 @@ function initMap() {
         });
         //吹き出しの中身の文言を引数で送る。
         attachMessage(marker, results.features[i].properties.name);
-      }
+      } // /for
     }
-    //マーカーをクリックしたときに、吹き出しを出す。
+
+    // マーカーをクリックしたときに吹き出しを出す
     function attachMessage(marker, msg) {
       google.maps.event.addListener(marker, 'click', function(event) {
         new google.maps.InfoWindow({
