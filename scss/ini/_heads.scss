@@ -1,5 +1,9 @@
 h1, h2, h3 {
   padding-bottom: 4rem;
+
+  &::after{
+    content: "";
+  }
 }
 
 h1 {
