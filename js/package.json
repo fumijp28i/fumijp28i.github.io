@@ -1,0 +1,28 @@
+feed_callback({
+  "features": [
+    {
+      "properties": {
+        "name": "金沢駅"
+      },
+      "geometry": {
+        "coordinates": [136.6481606694275, 36.57809597446637]
+      }
+    },
+    {
+      "properties": {
+        "name": "兼六園"
+      },
+      "geometry": {
+        "coordinates": [136.66256630309994, 36.562323505378785]
+      }
+    },
+    {
+      "properties": {
+        "name": "近江町市場"
+      },
+      "geometry": {
+        "coordinates": [136.656813, 36.571313]
+      }
+    }
+  ]
+});
