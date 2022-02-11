@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <title>Kanazawa Trip Map 202202</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <link rel="stylesheet" type="text/css" href="./resetcss.css" />
+  <link rel="stylesheet" type="text/css" href="./style.css" />
+  <script type="text/javascript" src="./scripts.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+</head>
+
+<body>
+  <!-- 表示領域 -->
+  <div>
+    <h2>地図ですよ</h2>
+    <div id="map"></div>
+  </div>
+  <div>
+    <h2>リストのデータベースですよ</h2>
+    <div>
+      <!-- ListDataBase -->
+      <ul id="ldb"></ul>
+    </div>
+  </div>
+  <div>
+    <h2>表のデータベースですよ</h2>
+    <div class="tdb">
+      <!-- TableDataBase -->
+      <table></table>
+    </div>
+  </div>
+  <div>
+    <h2>スプレッドシートURLですよ</h2>
+    <a href=""><span>https://sheets.googleapis.com/v4/spreadsheets/13vCc8TwCt_vPUxuD7T8GrPO8eaHbW8ltEMvrylGeuaA/values/DB?key=AIzaSyAM7gnRPZuN28chn6TkYHANxG9RlNng5Oo</span></a>
+  </div>
+
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChEDhgVciEbcOKfWwOTC-Ii2KBPyeahuQ&callback=initMap&v=weekly" async></script>
+</body>
+
+</html>
