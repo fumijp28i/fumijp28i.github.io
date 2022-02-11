@@ -17,6 +17,19 @@ const latlng = {
 }
 */
 
+// Texture map
+function TextureMapType(tileSize) {
+  this.tileSize = tileSize;
+}
+
+TextureMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
+  var div = ownerDocument.createElement('div');
+  div.style.width = this.tileSize.width + 'px';
+  div.style.height = this.tileSize.height + 'px';
+  div.style.background = 'url(../assets/img/suisai_gayoushi@2x.png)';
+  div.style.backgroundSize = '256px 256px';
+  return div;
+};
 
 // Init Map
 function initMap() {
@@ -56,7 +69,7 @@ function initMap() {
           position: latLng,
           map: map
         });
-        //吹き出しの中身の文言を引数で送る。
+        //吹き出しの中身の文言を引数で送る
         attachMessage(marker, results.features[i].properties.name);
       } // /for
     }
