@@ -81,6 +81,17 @@ b {
   text-decoration: none;
 }
 
+b::after {
+  content: '';
+  width: 110px;
+  height: 4px;
+  display: inline-block;
+  background-color: #4688F1;
+  position: absolute;
+  bottom: -10px;
+  left: calc(50% - 55px)
+}
+
 img {
   max-width: 100%;
   height: auto;
