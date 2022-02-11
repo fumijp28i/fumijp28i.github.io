@@ -68,6 +68,7 @@ function initMap() {
           content: msg
         }).open(marker.getMap(), marker);
       });
+    }
 /*
   // マーカー
   marker = new google.maps.Marker({ // マーカーの追加
