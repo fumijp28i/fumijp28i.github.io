@@ -10,35 +10,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 </head>
 
+<!-- body -->
 <body>
-  <!-- 表示領域 -->
-  <div>
-    <h2>地図ですよ</h2>
-    <div id="map"></div>
-  </div>
-  <div>
-    <h2>リストのデータベースですよ</h2>
-    <div>
-      <!-- ListDataBase -->
-      <ul id="ldb"></ul>
-    </div>
-  </div>
-  <div>
-    <h2>表のデータベースですよ</h2>
-    <div class="tdb">
-      <!-- TableDataBase -->
-      <table></table>
-    </div>
-  </div>
-  <div>
-    <h2>スプレッドシートURLですよ</h2>
-    <a href=""><span>https://sheets.googleapis.com/v4/spreadsheets/13vCc8TwCt_vPUxuD7T8GrPO8eaHbW8ltEMvrylGeuaA/values/DB?key=AIzaSyAM7gnRPZuN28chn6TkYHANxG9RlNng5Oo</span></a>
-  </div>
+  <!-- header -->
+  <header>
+    <section class="section-header">
+      <div class="innner">
+        <h2 class="txt-cnt c1">Hello World. 2022</h2>
+        <span class="txt-cnt c2">
+          <p>このサイトは<a href="https://twitter.com/fumijp28i" target="_blank"><b>@fumijp28i</b></a>によって作られています。</p>
+        </span>
+      </div>
+    </section>
+  </header>
+
+  <!-- main -->
+  <main>
+    <section class="section-main map">
+      <div class="main-1">
+        <h2>地図ですよ</h2>
+        <div id="map"></div>
+      </div>
+      <div class="main-2">
+        <h2>リストのデータベースですよ</h2>
+        <div>
+          <!-- ListDataBase -->
+          <ul id="ldb"></ul>
+        </div>
+        <div class="main-3">
+          <h2>表のデータベースですよ</h2>
+          <div class="tdb">
+            <!-- TableDataBase -->
+            <table></table>
+          </div>
+        </div>
+        <div class="main-4">
+          <h2>URLですよ</h2>
+          <span><a href="https://sheets.googleapis.com/v4/spreadsheets/13vCc8TwCt_vPUxuD7T8GrPO8eaHbW8ltEMvrylGeuaA/values/DB?key=AIzaSyAM7gnRPZuN28chn6TkYHANxG9RlNng5Oo" target="_blank">スプレッドシートURL</a>ですよ</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- footer -->
+  <footer>
+    <span class="copyright"><small>© fumijp28i 2022</small></span>
+  </footer>
 
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC900cOtNrpfUDGeEYovRp25Ils4_7su8k&callback=initMap&v=weekly" async></script>
+
 </body>
+<!-- /body -->
 
 </html>
