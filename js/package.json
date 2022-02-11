@@ -23,6 +23,14 @@ feed_callback({
       "geometry": {
         "coordinates": [136.656813, 36.571313]
       }
+    },
+    {
+      "properties": {
+        "name": "不室屋"
+      },
+      "geometry": {
+        "coordinates": [136.668063, 36.572437]
+      }
     }
   ]
 });
