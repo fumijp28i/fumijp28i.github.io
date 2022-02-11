@@ -69,6 +69,18 @@ a:hover {
   text-decoration: none;
 }
 
+b {
+  color: transparent;
+  background-image: -webkit-linear-gradient(right, #777dff 0px, #f154ff 200px, #f0357c 400px),-webkit-linear-gradient(left, #777dff 0px, #497ce2 200px, #37bdde 400px);
+  background-image: linear-gradient(to left, #777dff 0px, #f154ff 200px, #f0357c 400px),linear-gradient(to right, #777dff 0px, #497ce2 200px, #37bdde 400px);
+  background-size: 50% 100%;
+  background-position: top left, top right;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+}
+
 img {
   max-width: 100%;
   height: auto;
