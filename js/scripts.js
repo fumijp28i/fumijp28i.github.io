@@ -22,7 +22,7 @@ const latlng = {
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), { // #mapに地図を埋め込む
     center: mapCenter, // 地図の表示中心地を設定（今回は緯度経度を変数に格納しそれを呼び出し）
-    zoom: 14, // 地図のズームを指定
+    zoom: 12, // 地図のズームを指定
     mapTypeControl: false, // マップ切り替えのコントロールを表示するかどうか
     streetViewControl: true // ストリートビューのコントロールを表示するかどうか
   });
