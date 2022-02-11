@@ -1,4 +1,4 @@
-feed_callback({
+db_callback({
   "features": [
     {
       "properties": {

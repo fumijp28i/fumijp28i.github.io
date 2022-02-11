@@ -61,7 +61,7 @@ function initMap() {
   document.getElementsByTagName("head")[0].appendChild(script);
 
 // 呼び出し
-  window.feed_callback = function(results) {
+  window.db_callback = function(results) {
       // マップにマーカーを生成
       for (var i = 0; i < results.features.length; i++) {
         var coords = results.features[i].geometry.coordinates;
