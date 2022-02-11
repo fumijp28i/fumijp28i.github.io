@@ -1,5 +1,5 @@
 // Declaration
-const map;
+var map;
 const mapCenter = {
   // 金沢駅: HJHX+67 36.578063,136.648188
   lat: 36.578063, // 緯度
@@ -17,28 +17,6 @@ const latlng = {
 }
 */
 
-/*
-var markerData = [
-  {
-    "name": "金沢駅",
-    "site": "〒920-0858 石川県金沢市木ノ新保町1番1号",
-    "pluscode": "HJHX+67",
-    "latlng": "36.57809597446637, 136.6481606694275",
-    "url": "null",
-    "type": "sta"
-  },
-
-  {
-    "name": "兼六園",
-    "site": "〒920-0936 石川県金沢市兼六町１",
-    "pluscode": "HM67+V3",
-    "latlng": "36.562323505378785, 136.66256630309994",
-    "url": "null",
-    "type": "plc"
-  }
-
-]
-*/
 
 // Init Map
 function initMap() {
