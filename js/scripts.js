@@ -56,8 +56,9 @@ function initMap() {
 
 
 // マーカー配置の準備　（①JSONを呼びに行き、ドキュメントに配架）
-  document.createElement("script").setAttribute("src", "../js/package.json");
-  document.getElementsByTagName("head")[0].appendChild(document.createElement("script"));
+  const script = document.createElement("script");
+  script.setAttribute("src", "../js/package.json");
+  document.getElementsByTagName("head")[0].appendChild(script);
 
 // 呼び出し
   window.feed_callback = function(results) {
