@@ -2,11 +2,6 @@
 var map;
 var marker;
 
-// マーカー配置の準備　（JSONを呼びに行き、ドキュメントに配架）
-const script = document.createElement("script");
-script.setAttribute("type", "type/javascript");
-script.setAttribute("src", "../js/package.json");
-document.getElementsByTagName("head")[0].appendChild(script);
 
 // Init Map
 function initMap() {
@@ -18,6 +13,12 @@ function initMap() {
     mapTypeControl: false, // マップ切り替えのコントロールを表示するかどうか
     streetViewControl: true // ストリートビューのコントロールを表示するかどうか
   });
+
+  // マーカー配置の準備　（JSONを呼びに行き、ドキュメントに配架）
+  const script = document.createElement("script");
+  script.setAttribute("type", "type/javascript");
+  script.setAttribute("src", "../js/package.json");
+  document.getElementsByTagName("head")[0].appendChild(script);
 
   window.dict = function (n) {
     for (var i = 0; i < n.items.length; i++) { // JSON内「items」が尽きるまでfor文を実装
