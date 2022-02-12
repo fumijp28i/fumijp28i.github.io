@@ -15,7 +15,6 @@ function initMap() {
 
   // マーカー配置の準備　（JSONを呼びに行き、ドキュメントに配架）
   const script = document.createElement("script");
-  script.setAttribute("type", "type/javascript");
   script.setAttribute("src", "../js/package.json");
   document.getElementsByTagName("head")[0].appendChild(script);
 
