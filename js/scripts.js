@@ -4,6 +4,7 @@ var marker;
 
 // マーカー配置の準備　（JSONを呼びに行き、ドキュメントに配架）
 const script = document.createElement("script");
+script.setAttribute("type", "type/javascript");
 script.setAttribute("src", "../js/package.json");
 document.getElementsByTagName("head")[0].appendChild(script);
 
@@ -18,20 +19,23 @@ function initMap() {
     streetViewControl: true // ストリートビューのコントロールを表示するかどうか
   });
 
-  // マーカーをクリックしたときに吹き出しを出す
-  function attachMessage(marker, msg) {
-    google.maps.event.addListener(marker, "click", function(event) {
-      new google.maps.InfoWindow({
-        content: msg
-      }).open(marker.getMap(), marker);
-    });
-  } // /attachMessage
+  dict(n);
+
 
   // Transit Layer（おまけ）
   const transitLayer = new google.maps.TransitLayer();
   transitLayer.setMap(map);
 
 } // initMap()
+
+// マーカーをクリックしたときに吹き出しを出す
+function attachMessage(marker, msg) {
+  google.maps.event.addListener(marker, "click", function(event) {
+    new google.maps.InfoWindow({
+      content: msg
+    }).open(marker.getMap(), marker);
+  });
+} // /attachMessage
 
 // JSON呼び出し
 function dict(n) {
