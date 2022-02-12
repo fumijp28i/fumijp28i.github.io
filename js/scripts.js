@@ -5,7 +5,7 @@ var marker;
 // Init Map
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), { // #mapに地図を埋め込む
-    center: { lat: 36.578063, lng: 136.648188 }, // 地図の表示中心地を設定（今回は緯度経度を変数に格納しそれを呼び出し）
+    center: { lat: 36.578063, lng: 136.648188 }, // 地図の表示中心地を設定
     // 金沢駅: 8Q8RHJHX+67 36.578063,136.648188
     zoom: 12, // 地図のズームを指定
     mapId: "6f99372f7c64b8b1", // MapIDの使用
@@ -19,7 +19,7 @@ function initMap() {
   document.getElementsByTagName("head")[0].appendChild(script);
 
   // JSON呼び出し
-  function dict(n) {
+  window.dict = function(n) {
     // マップにマーカーを生成
     for (var i = 0; i < n.items.length; i++) { // JSON内「items」が尽きるまでfor文を実装
 
@@ -43,7 +43,7 @@ function initMap() {
       // 吹き出しの中身の文言を引数で送る
       attachMessage(marker, n.items[i].name);
     } // /for
-  } // /dict(n)
+  } // /window.dict
 
   // マーカーをクリックしたときに吹き出しを出す
   function attachMessage(marker, msg) {
@@ -74,3 +74,6 @@ TextureMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
   div.style.backgroundSize = "256px 256px";
   return div;
 };
+
+
+// JSON内データをノード吐き出し
