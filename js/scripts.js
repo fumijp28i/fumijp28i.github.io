@@ -2,7 +2,6 @@
 var map;
 var marker;
 
-
 // Init Map
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), { // #mapに地図を埋め込む
@@ -20,7 +19,9 @@ function initMap() {
   script.setAttribute("src", "../js/package.json");
   document.getElementsByTagName("head")[0].appendChild(script);
 
-  window.dict = function (n) {
+  // JSON呼び出し
+  window.dict = function(n) {
+    // マップにマーカーを生成
     for (var i = 0; i < n.items.length; i++) { // JSON内「items」が尽きるまでfor文を実装
 
       // TL;DR PlusCodeを緯度経度に変換し、それをgoogle.maps.LatLng()メソッドに入れる
@@ -43,7 +44,7 @@ function initMap() {
       // 吹き出しの中身の文言を引数で送る
       attachMessage(marker, n.items[i].name);
     } // /for
-  }
+  } // /window.dict
 
   // マーカーをクリックしたときに吹き出しを出す
   function attachMessage(marker, msg) {
@@ -61,20 +62,6 @@ function initMap() {
 } // initMap()
 
 
-// JSON呼び出し
-function dict(n) {
-} // / dict(m)
-
-
-/*
-// JSON内データをノード吐き出し
-function json2node(j) {
-  for (var i = 0; i < i.items.length; i++) {
-
-  }
-}
-*/
-
 // Texture map
 function TextureMapType(tileSize) {
   this.tileSize = tileSize;
@@ -88,3 +75,6 @@ TextureMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
   div.style.backgroundSize = "256px 256px";
   return div;
 };
+
+
+// JSON内データをノード吐き出し
