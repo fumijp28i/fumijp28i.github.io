@@ -4,17 +4,13 @@ var marker;
 
 // Init Map
 function initMap() {
-  const mapConfig = {
+  map = new google.maps.Map(document.getElementById("map"), { // #mapに地図を埋め込む
     center: { lat: 36.578063, lng: 136.648188 }, // 地図の表示中心地を設定（今回は緯度経度を変数に格納しそれを呼び出し）
     // 金沢駅: 8Q8RHJHX+67 36.578063,136.648188
     zoom: 12, // 地図のズームを指定
     mapId: "6f99372f7c64b8b1", // MapIDの使用
     mapTypeControl: false, // マップ切り替えのコントロールを表示するかどうか
     streetViewControl: true // ストリートビューのコントロールを表示するかどうか
-  }
-
-  map = new google.maps.Map(document.getElementById("map"), { // #mapに地図を埋め込む
-    mapConfig
   });
 
   // マーカー配置の準備　（JSONを呼びに行き、ドキュメントに配架）
