@@ -57,6 +57,40 @@ function initMap() {
 } // initMap()
 
 // マーカーを配置するための関数
+window.dict = function(n) {
+  encodeJSON();
+  fetchPkg.then (
+    n => {
+      // マップにマーカーを生成
+      for (var i = 0; i < n.items.length; i++) { // JSON内「items」が尽きるまでfor文を実装
+
+        // TL;DR PlusCodeを緯度経度に変換し、それをgoogle.maps.LatLng()メソッドに入れる
+        // ① JSON内PlusCodeを「n.items[i].plsucode」で呼び出し、変数に代入
+        var pluscode = n.items[i].pluscode;
+
+        // ② PlusCodeをOpenlocationCode.decodeメソッドでデコードし、変数「decode」に返された連想配列を格納
+        var decoded = OpenLocationCode.decode(pluscode);
+
+        // ③ 緯度経度を連想配列より取り出し、各項目をMath.round()で小数点6位の四捨五入
+        var latCtr = Math.round(decoded.latitudeCenter * 1000000) / 1000000;
+        var lngCtr = Math.round(decoded.longitudeCenter * 1000000) / 1000000;
+
+        // ④ google.maps.Markerメソッドに緯度経度を渡すため、変数「area」を準備
+        var area = new google.maps.LatLng(latCtr, lngCtr);
+
+        // ⑤ いよいよマーカーをつけます
+        var marker = new google.maps.Marker({
+          map: map,
+          position: area
+        });
+
+        // 吹き出しの中身の文言を引数で送る
+        attachMessage(marker, n.items[i].name);
+      } // /for
+    } // n
+  ) // then
+}
+
 function putMakers() {
   encodeJSON();
   fetchPkg.then (
