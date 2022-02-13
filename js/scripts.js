@@ -1,6 +1,10 @@
 // Declaration
 var map;
 var marker;
+const fetchPkg = fetch("../js/package.json");
+const ldb = document.getElementById("ldb");
+const tdb = document.getElementById("tdb");
+
 
 // Init Map
 function initMap() {
@@ -15,6 +19,7 @@ function initMap() {
 
   // マーカー配置の準備　（JSONを呼びに行き、ドキュメントに配架）
   const script = document.createElement("script");
+  script.setAttribute("type", "application/json");
   script.setAttribute("src", "../js/package.json");
   document.getElementsByTagName("head")[0].appendChild(script);
 
@@ -38,7 +43,10 @@ function initMap() {
       var area = new google.maps.LatLng(latCtr, lngCtr);
 
       // ⑤ いよいよマーカーをつけます
-      var marker = new google.maps.Marker({ map: map, position: area });
+      var marker = new google.maps.Marker({
+        map: map,
+        position: area
+      });
 
       // 吹き出しの中身の文言を引数で送る
       attachMessage(marker, n.items[i].name);
@@ -60,6 +68,49 @@ function initMap() {
 
 } // initMap()
 
+// 取得したJSONをノード吐き出し
+function nodeJSON() {
+  fetchPkg
+  // fetchしてJSONを呼び出すための準備
+  .then(resp => { // function(resp){}と同義
+      if (!resp.ok) {
+        throw new Error("NG");
+      }
+      return resp.json(); // fetchした中から呼び出すデータ方式をJSONとして設定する
+    })
+
+  // 呼び出されたJSONを処理するための記述
+  .then(p => { // function(p){}と同義
+    for (var a = 0; a < p.items.length; a++) {
+
+      // 変数宣言（識別可能なようにJSONに起因するリテラルな変数名に設定するべき）
+      var _name = p.items[a].name;
+      var _site = p.items[a].site;
+      var _pluscode = p.items[a].pluscode;
+      var _url = p.items[a].url;
+      var _type = p.items[a].type;
+      // 変数を配列に格納
+      var _materials = [_name, _site, _pluscode, _url, _type];
+
+      // ノード生成
+      var li = document.createElement("li");
+
+      // 各変数に対し同一処理を行うためfor文で処理
+      for (var y = 0; y < _materials.length; y++) {
+        if (_materials != null) {
+          // ノード追加
+          var _elems = document.createTextNode(_materials[y]);
+          li.appendChild(_elems);
+          // 各項目に応じたクラスを追加
+          _materials[y].classList.add("node-" + _materials[y]);
+        } // if / null以外はノードを追加
+      } // for
+      ldb.appendChild(li);
+    } // for
+  }) // then p
+
+} // nodeJSON()
+
 
 // Texture map
 function TextureMapType(tileSize) {
@@ -74,6 +125,3 @@ TextureMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
   div.style.backgroundSize = "256px 256px";
   return div;
 };
-
-
-// JSON内データをノード吐き出し
