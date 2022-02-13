@@ -12,7 +12,7 @@ function encodeJSON() {
   fetchPkg
     // fetchしてJSONを呼び出すための準備
     .then (
-      resp => { // function(resp){}と同義
+      resp => {
         if (!resp.ok) {
           throw new Error("NG");
         }
