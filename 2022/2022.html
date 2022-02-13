@@ -5,8 +5,6 @@
   <title>Kanazawa Trip Map 202202</title>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
   <link rel="stylesheet" type="text/css" href="../style.css" />
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/openlocationcode/latest/openlocationcode.min.js"></script>
-  <script type="text/javascript" src="../js/scripts.js"></script>
   <meta charset="UTF-8" />
   <meta http-equiv="Cache-Control" content="no-cache">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
@@ -28,30 +26,27 @@
 
   <!-- main -->
   <main>
-    <section class="section-main map">
-      <div class="main-1">
-        <h2>地図ですよ</h2>
+    <section class="section-main">
+      <section class="main-1 map">
+        <h2>Google Map</h2>
         <div id="map"></div>
-      </div>
-      <div class="main-2">
-        <h2>リストのデータベースですよ</h2>
-        <div>
-          <!-- ListDataBase -->
+      </section>
+      <section class="main-2 db">
+        <h2>Databases</h2>
+        <section class="list">
+          <h3>Lists</h3>
           <ul id="ldb"></ul>
-        </div>
-        <div class="main-3">
-          <h2>表のデータベースですよ</h2>
-          <div class="tdb">
-            <!-- TableDataBase -->
-            <table></table>
-          </div>
-        </div>
-        <div class="main-4">
-          <h2>URLですよ</h2>
-          <span><a href="https://sheets.googleapis.com/v4/spreadsheets/13vCc8TwCt_vPUxuD7T8GrPO8eaHbW8ltEMvrylGeuaA/values/DB?key=AIzaSyAM7gnRPZuN28chn6TkYHANxG9RlNng5Oo" target="_blank">スプレッドシートURL</a>ですよ</span>
-        </div>
-      </div>
-    </section>
+        </section>
+        <section class="tdb">
+          <h3>Tabels</h3>
+          <table id="tdb"></table>
+        </section>
+        <section class="refs">
+          <h3>URL</h3>
+          <span><a href="https://sheets.googleapis.com/v4/spreadsheets/13vCc8TwCt_vPUxuD7T8GrPO8eaHbW8ltEMvrylGeuaA/values/DB?key=AIzaSyAM7gnRPZuN28chn6TkYHANxG9RlNng5Oo" target="_blank">スプレッドシートURL</a></span>
+        </section>
+      </section>
+    </section><!-- section-main -->
   </main>
 
   <!-- footer -->
@@ -59,6 +54,9 @@
     <span class="copyright"><small>© fumijp28i 2022</small></span>
   </footer>
 
+  <!-- scripts -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/openlocationcode/latest/openlocationcode.min.js"></script>
+  <script type="text/javascript" src="../js/scripts.js"></script>
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
