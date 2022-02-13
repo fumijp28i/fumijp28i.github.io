@@ -1,14 +1,6 @@
 h1, h2, h3 {
   padding-bottom: 4rem;
-
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 4px;
-    background: repeating-linear-gradient(-45deg, #F0BF59, #F0BF59 2px, #FEF4E2 2px, #FEF4E2 4px);  }
+  position: relative;
 }
 
 h1 {
