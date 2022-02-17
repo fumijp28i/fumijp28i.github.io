@@ -1,40 +1,40 @@
-dict({
-  "items": [
+{
+  "values":
+  [
     {
-      "name": "金沢駅",
-      "site": "〒920-0858 石川県金沢市木ノ新保町1番1号",
-      "pluscode": "8Q8RHJHX+67",
-      "url": null,
-      "type": "sta"
+      "Name": "金沢駅",
+      "Site": "〒920-0858 石川県金沢市木ノ新保町1番1号",
+      "Pluscode": "8Q8RHJHX+67",
+      "URL": null,
+      "Type": "sta"
     },
     {
-      "name": "兼六園",
-      "site": "〒920-0936 石川県金沢市兼六町１",
-      "pluscode": "8Q8RHM67+V3",
-      "url": null,
-      "type": "plc"
+      "Name": "兼六園",
+      "Site": "〒920-0936 石川県金沢市兼六町１",
+      "Pluscode": "8Q8RHM67+V3",
+      "URL": null,
+      "Type": "plc"
     },
     {
-      "name": "近江町市場",
-      "site": "〒920-0905 石川県金沢市上近江町５０",
-      "pluscode": "8Q8RHMC4+GP",
-      "url": null,
-      "type": "plc"
+      "Name": "近江町市場",
+      "Site": "〒920-0905 石川県金沢市上近江町５０",
+      "Pluscode": "8Q8RHMC4+GP",
+      "URL": null,
+      "Type": "plc"
     },
     {
-      "name": "不室屋",
-      "site": "〒920-0831 石川県金沢市東山１丁目２５−３",
-      "pluscode": "8Q8RHMC9+X5",
-      "url": null,
-      "type": "eat"
+      "Name": "不室屋",
+      "Site": "〒920-0831 石川県金沢市東山１丁目２５−３",
+      "Pluscode": "8Q8RHMC9+X5",
+      "URL": null,
+      "Type": "eat"
     },
     {
-      "name": "金沢21世紀美術館",
-      "site": "〒920-8509 石川県金沢市広坂１丁目２−１",
-      "pluscode": "8Q8RHM65+8G",
-      "url": null,
-      "type": "plc"
+      "Name": "金沢21世紀美術館",
+      "Site": "〒920-8509 石川県金沢市広坂１丁目２−１",
+      "Pluscode": "8Q8RHM65+8G",
+      "URL": null,
+      "Type": "plc"
     }
   ]
 }
-);
