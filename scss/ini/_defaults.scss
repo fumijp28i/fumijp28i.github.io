@@ -9,11 +9,15 @@ body {
   padding: 0;
   border: none;
   color: #525252;
+  font-size: 12px;
   -webkit-text-size-adjust: 100%;
   letter-spacing: 1.5px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-overflow-scrolling: touch;
+
+  scrollbar-width: 8px;
+  scrollbar-color: #E6B125;
 
   &::-webkit-scrollbar-thumb {
     background: #E6B125;
@@ -295,4 +299,13 @@ body a {
 
 header, main, footer {
   padding: 0 10%;
+}
+
+
+::selection {
+  background: #dbecf0;
+}
+
+::-moz-selection {
+  background: #dbecf0;
 }

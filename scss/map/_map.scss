@@ -1,16 +1,33 @@
+$colour_stc: #EC407A;
+$colour_eat: #26A69A;
+$colour_drm: #FFA726;
+$colour_htl: #FF7043;
+
 #map {
   width: 100%;
   height: 70vh;
-  margin: 8vh auto;
-
-  .gm-style .gm-style-iw-c {
-    background: linear-gradient(to top, #f4e1e8 0%, #f4e1e8 11.1%, #f5e2e9 20.2%, #f5e4e9 27.7%, #f6e5ea 33.8%, #f7e7eb 38.8%, #f8eaed 43.1%, #f9ecee 47%, #faefef 50.8%, #fbf1f1 54.7%, #fcf3f2 59.2%, #fdf5f3 64.5%, #fef7f4 70.9%, #fef8f4 78.7%, #fff9f5 88.3%, #fff9f5 100%);
-  }
+  margin: 4vh auto;
 
   .node-pkg {
     position: relative;
     margin: 0.4rem 1rem;
-  }
+
+    .pkg-txt {
+      &.type-stc { color: $colour_stc; }
+      &.type-eat { color: $colour_eat; }
+      &.type-drm { color: $colour_drm; }
+      &.type-htl { color: $colour_htl; }
+
+      .pkg-msg {
+        display: inline-block;
+        position: relative;
+      } // .pkg-msg
+    } // .pkg-txt
+
+    .txt-num {
+      margin-right: 1rem;
+    }
+  } // .node-pkg
 
   .txt-name {
     font-size: 1.6rem;
@@ -25,5 +42,59 @@
       height: 100%;
       margin: 0 auto;
     }
+  } // .txt-name
+} // #map
+
+.tdb {
+  width: 100%;
+
+  table {
+    overflow: scroll;
+  }
+
+  thead {
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  tr {
+    height: calc(1.2rem + 16px);
+    border-bottom: 1px #E7828C dotted;
+  }
+
+  td {
+    padding: 1.2rem;
+  }
+
+  .node-num, .node-type {
+    text-align: center;
+  }
+
+  .node-name {
+    font-weight: bold;
+  }
+
+  .node-type, .node-url, .node-pluscode {
+    font-family: Roboto Mono;
+  }
+
+  .node-pluscode {
+    text-align: center;
+  }
+
+  .node-stc {
+    border-left: 4px $colour_stc solid;
+  }
+
+  .node-eat {
+    border-left: 4px $colour_eat solid;
+  }
+
+  .node-drm {
+    border-left: 4px $colour_drm solid;
+  }
+
+  .node-htl {
+    border-left: 4px $colour_htl solid;
   }
 }

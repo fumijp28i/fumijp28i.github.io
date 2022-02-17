@@ -32,11 +32,14 @@
         <h2>Google Map</h2>
         <div id="map"></div>
       </section>
-      <section class="main-2 inner db">
+      <section class="main-2 innner info">
+        <h2>Info</h2>
+        <div id="node"></div>
+      </section>
+      <section class="main-3 inner db">
         <h2>Databases</h2>
-        <section class="tdb">
-          <h3>Tabels</h3>
-          <table id="tdb"></table>
+        <section class="table">
+          <table id="tdb" class="tdb"></table>
         </section>
       </section>
     </section><!-- section-main -->
@@ -53,7 +56,7 @@
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC900cOtNrpfUDGeEYovRp25Ils4_7su8k&callback=initMap&v=weekly" async></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC900cOtNrpfUDGeEYovRp25Ils4_7su8k&libraries=places&callback=initMap&v=weekly" async></script>
 
 </body>
 <!-- /body -->
