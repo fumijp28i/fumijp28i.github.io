@@ -1,21 +1,32 @@
-/** ========== Declaration ========== **/
+// ========== DECLARATION ========== //
 let map;
-const mapCenter = { lat: 36.5649, lng: 136.6598 };
-/* ========== CONFIG ========== */
-const mapConfig = {
-  center: mapCenter, // 地図の表示中心地を設定
+let area;
+let activeWindow;
+
+// ========== DATAS ========== //
+const defaultCenter = { lat: 36.5648875, lng: 136.6597969 } // 8Q8RHM75+XW3
+let kanazawaSta = "8Q8RHJHX+67";
+let toyamaSta = "8Q8VP627+P3";
+
+// ========== CONFIG ========== //
+const fetchURL = "https://sheets.googleapis.com/v4/spreadsheets/13vCc8TwCt_vPUxuD7T8GrPO8eaHbW8ltEMvrylGeuaA/values/DB?key=AIzaSyC_NpYX_qUe_jEEd6khZlelktz6_sKexX8";
+const fetchAPI = fetch(fetchURL);
+
+const defaultZoom = 14;
+const mapID = "6f99372f7c64b8b1";
+
+const mapOpts = {
+  center: defaultCenter, // 地図の表示中心地を設定
   // 金沢駅: 8Q8RHJHX+67 36.578063,136.648188
-  zoom: 14, // 地図のズームを指定
-  mapId: "6f99372f7c64b8b1", // MapIDの使用
+  zoom: defaultZoom, // 地図のズームを指定
+  mapId: mapID, // MapIDの使用
   mapTypeControl: false, // マップ切り替えのコントロールを表示するかどうか
   streetViewControl: true, // ストリートビューのコントロールを表示するかどうか
-  gestureHandling: 'greedy'
+  gestureHandling: 'greedy' // ズーム設定
 };
-const fetchAPI = fetch("https://sheets.googleapis.com/v4/spreadsheets/13vCc8TwCt_vPUxuD7T8GrPO8eaHbW8ltEMvrylGeuaA/values/DB?key=AIzaSyC_NpYX_qUe_jEEd6khZlelktz6_sKexX8");
-const fetchURL = "https://sheets.googleapis.com/v4/spreadsheets/13vCc8TwCt_vPUxuD7T8GrPO8eaHbW8ltEMvrylGeuaA/values/DB?key=AIzaSyC_NpYX_qUe_jEEd6khZlelktz6_sKexX8";
 
 
-/* ========== icons ========== */
+// ========== ICONS ========== //
 const svgToBase64DataURL = (size, color, path) => {
   const svg = `<svg width="${size}px" height="${size}px" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg" version="1.1"><path d="${path}" fill="${color}"/></svg>`
   return {
@@ -73,7 +84,7 @@ let ICON_oth = {
 
 /* ========== functions ========== */
 // Mapの基本設定を行う関数
-function putCircleOnMap(center = mapCenter, rad) {
+function putCircleOnMap(center = defaultCenter, rad) {
   new google.maps.Circle({
     center: center,       // 中心点(google.maps.LatLng)
     fillColor: '#FFF5E3',   // 塗りつぶし色
@@ -87,7 +98,7 @@ function putCircleOnMap(center = mapCenter, rad) {
 }
 
 function initMap() {
-  map = new google.maps.Map(document.getElementById("map"), mapConfig);
+  map = new google.maps.Map(document.getElementById("map"), mapOpts);
 
   putMarkers();
   putCircleOnMap(100);
@@ -189,19 +200,12 @@ textureMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
 
 // Pluscodeをエンコードするための関数
 function putMarkers() {
-  fetchAPI
-    .then (
-      r => {
-        if (!r.ok) {
-          throw new Error("NG");
-        }
-        return r.json() // fetchした中から呼び出すデータ方式をJSONとして設定する
-      }
-    ) // then
+  nodeJSON()
     .then (
       n => {
         // マップにマーカーを生成
         for (let i = 1; i < n.values.length; i++) {
+
           // JSON内「items」が尽きるまでfor文を実装
           // i = 1にしているのは、取得しているJSONの[0]が表題で、0から取得開始するとエラーを起こすため
 
@@ -231,13 +235,8 @@ function putMarkers() {
             icon: img
           });
 
-
-          //  TYpe別で処理を分けたい
-          // setType();
-
           // 吹き出しの中身の文言を引数で送る
-          sendInfo(marker, n.values[i][1], i, n.values[i][0]);
-
+          attachMsg(marker, n.values[i][1], i, n.values[i][0]);
 
         } // /for
       } // n
@@ -266,7 +265,9 @@ function encodePluscode(p) {
 
 
 // マーカーをクリックしたときに吹き出しを出す
-function sendInfo(marker, name, num, type) {
+function attachMsg(marker, name, num, type) {
+  let iw;
+
   let contentStr =
     '<div class="node-pkg">' +
       '<span class="pkg-txt type-' + type + '">' +
@@ -274,36 +275,48 @@ function sendInfo(marker, name, num, type) {
         '<span class="pkg-msg txt-name">' + name + '</span>' +
       '</span>' +
     '</div>';
+  // return contentStr;
 
   // もしTypeが「stc」なら、最初からピンを表示させておく
   if (type === "stc") {
-    new google.maps.InfoWindow({
+    iw = new google.maps.InfoWindow({
       content: contentStr
     }).open(map, marker);
-  } else { // もしstc以外なら、クリックイベントを「一度だけ（=Once）」発火させ内容を表示させる
+  } else {
+    // もしstc以外なら、クリックイベントを「一度だけ（=Once）」発火させ内容を表示させる
     google.maps.event.addListenerOnce(marker, "click",
-      function(e) {
-        new google.maps.InfoWindow({
+      e => { // クリックイベント発火時、すでに「.open」かどうか判断
+        if (activeWindow !== undefined) {
+          activeWindow.close();
+        }
+        activeWindow = new google.maps.InfoWindow({
           content: contentStr
-        })
-        .open(marker, marker);
+        }).open(map, marker);
+
+        // その他の挙動
         map.setZoom(15); // ズームする
-        map.setCenter(
+        map.panTo(
           new google.maps.LatLng(e.latLng.lat(), e.latLng.lng())
         ); // そのマーカーの座標をmap中心地としてセット
-      }
+      } // e
     );
   } // else
-} // /sendInfo
+} // /attachMsg
+
+function clickIW(e) {
+
+}
 
 
 
+function sendID(num, name, type, pluscode, url) {
+}
 
 
 
-async function nodeJSON(url = '') {
+async function nodeJSON(url = fetchURL) {
   // 既定のオプションには * が付いています
-  const response = await fetch(url, {
+  const r = await fetch(url, {
     method: 'GET', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
@@ -315,51 +328,52 @@ async function nodeJSON(url = '') {
     referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     body: JSON.stringify() // 本文のデータ型は "Content-Type" ヘッダーと一致させる必要があります
   })
-  return response.json(); // JSON のレスポンスをネイティブの JavaScript オブジェクトに解釈
+  return r.json(); // JSON のレスポンスをネイティブの JavaScript オブジェクトに解釈
 }
 
-nodeJSON(fetchURL)
+// Databaseを作る
+nodeJSON()
   .then (
-    p => {
+    t => {
       const tdb = document.getElementById("tdb");
 
       // JSONからデータを取得し、for文で処理を行う
-      for (let a = 1; a < p.values.length; a++) {
+      for (let a = 1; a < t.values.length; a++) {
+
+        // 情報を引数で送る
+        // sendID(a, p.values[a][1], p.values[a][0], p.values[i][3], p.values[i][4], p.values[a][5]);
 
         // 変数宣言（識別可能なようにJSONに起因するリテラルな変数名に設定するべき）
-        let _name = p.values[a][1];
-        let _site = p.values[a][3];
-        let _pluscode = p.values[a][4];
-        let _url = p.values[a][5];
-        let _type = p.values[a][0];
+        let _name = t.values[a][1];
+        let _site = t.values[a][3];
+        let _pluscode = t.values[a][4];
+        let _url = t.values[a][5];
+        let _type = t.values[a][0];
 
         // ノード生成の行程
-        let row = tdb.insertRow();
+        let tr = tdb.insertRow();
+        tr.className = "node-tr-type-" + _type;
 
         let cell;
         let celltxt;
 
-        cell = row.insertCell();
+        cell = tr.insertCell();
         cell.className = "node-num";
         cell.appendChild(document.createTextNode(a))
 
-        cell = row.insertCell();
-        cell.className = "node-type node-" + _type;
-        cell.appendChild(document.createTextNode(_type));
-
-        cell = row.insertCell();
+        cell = tr.insertCell();
         cell.className = "node-name";
         cell.appendChild(document.createTextNode(_name));
 
-        cell = row.insertCell();
+        cell = tr.insertCell();
         cell.className = "node-site";
         cell.appendChild(document.createTextNode(_site));
 
-        cell = row.insertCell();
+        cell = tr.insertCell();
         cell.className = "node-pluscode";
         cell.appendChild(document.createTextNode(_pluscode));
 
-        cell = row.insertCell();
+        cell = tr.insertCell();
         cell.className = "node-url";
         cell.appendChild(document.createTextNode(_url));
 
@@ -378,10 +392,6 @@ nodeJSON(fetchURL)
       th_cell.appendChild(document.createTextNode(""));
 
       th_cell = th_row.insertCell();
-      th_cell.className = "th-node-type";
-      th_cell.appendChild(document.createTextNode("Type"));
-
-      th_cell = th_row.insertCell();
       th_cell.className = "th-node-name";
       th_cell.appendChild(document.createTextNode("名称"));
 
@@ -396,6 +406,42 @@ nodeJSON(fetchURL)
       th_cell = th_row.insertCell();
       th_cell.className = "th-node-url";
       th_cell.appendChild(document.createTextNode("URL"));
-
     }
-  );
+  ); // nodeJSON;
+
+
+
+// ========= ボタンのための関数 ========= //
+function resetMap() {
+  initMap();
+  map.setZoom(defaultZoom); // ズームする
+  map.panTo(new google.maps.LatLng(defaultCenter));
+}
+
+// Pluscodeを引数に渡すことで中心地にセットするための関数
+function setPluscodeAsCenter(p) {
+  let area = encodePluscode(p);
+  map.setZoom(defaultZoom); // ズームする
+  map.panTo(new google.maps.LatLng(area));
+}
+
+
+function hideIW() {
+  // 処理
+}
+
+
+let show;
+const nowOnMap = document.getElementById("now-onmap");
+
+// inputを使って制御するための関数
+function tglStc() {
+  const showstc = document.getElementById("showstc");
+  showstc.onchange = function() {
+    if (showstc.checked) {
+      console.log("Is_checked");
+    } else {
+      console.log("Not_checked");
+    }
+  }
+} // tglStc

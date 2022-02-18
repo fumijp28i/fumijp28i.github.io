@@ -31,6 +31,62 @@
       <section class="main-1 inner map">
         <h2>Google Map</h2>
         <div id="map"></div>
+        <section class="mapconfig">
+          <div class="inner-wrap">
+            <div class="cfg-wrap cfg-btn">
+              <div class="item-frame">
+                <button id="resetmap" class="btn type-int" type="button" name="button" onclick="resetMap();">
+                  <span>地図を<i class="_blank"></i>初期化</span>
+                </button>
+              </div>
+              <div class="item-frame">
+                <button id="resetmap" class="btn type-int" type="button" name="button" onclick="hideIW();">
+                  <span>すべての<i class="_blank"></i>吹き出しを削除</span>
+                </button>
+              </div>
+              <div class="item-frame">
+                <button id="setkanazawatocenter" class="btn type-int" type="button" name="button" onclick="setPluscodeAsCenter(kanazawaSta);">
+                  <span><b>金沢駅</b>を<i class="_blank"></i>中心に表示</span>
+                </button>
+              </div>
+              <div class="item-frame">
+                <button id="settoyamatocenter" class="btn type-int" type="button" name="button" onclick="setPluscodeAsCenter(toyamaSta);">
+                  <span><b>富山駅</b>を<i class="_blank"></i>中心に表示</span>
+                </button>
+              </div>
+            </div>
+            <div class="cfg-wrap cfg-chk">
+              <div class="item-frame">
+                <label for="showstc">
+                  <input type="checkbox" id="showstc" class="checkbox" checked="checked" />
+                  <label class="switch" for="showstc"></label>
+                  <label class="text" for="showstc"><span class="tgl-txt">目印箇所</span></label>
+                </label>
+              </div>
+              <div class="item-frame">
+                <label for="showstc">
+                  <input type="checkbox" id="showeat" class="checkbox" checked="checked" />
+                  <label class="switch" for="showeat"></label>
+                  <label class="text" for="showeat"><span class="tgl-txt">飲食店</span></label>
+                </label>
+              </div>
+              <div class="item-frame">
+                <label for="showstc">
+                  <input type="checkbox" id="showdrm" class="checkbox" checked="checked" />
+                  <label class="switch" for="showdrm"></label>
+                  <label class="text" for="showdrm"><span class="tgl-txt">宿</span></label>
+                </label>
+              </div>
+              <div class="item-frame">
+                <label for="showstc">
+                  <input type="checkbox" id="showhtl" class="checkbox" checked="checked" />
+                  <label class="switch" for="showhtl"></label>
+                  <label class="text" for="showhtl"><span class="tgl-txt">ホテル</span></label>
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
       </section>
       <section class="main-2 innner info">
         <h2>Info</h2>
