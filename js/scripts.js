@@ -416,12 +416,10 @@ nodeJSON()
 
         cell = tr.insertCell();
         cell.className = "node-url";
-        if (_url !== "null") { // DBのURL欄が「
-          attacha.href = "https://" + _url;
-          attacha.setAttribute("target", "_blank") ;
-          attacha.appendChild(document.createTextNode(_url));
-          cell.appendChild(attacha);
-        }
+        attacha.href = "https://" + _url;
+        attacha.setAttribute("target", "_blank") ;
+        attacha.appendChild(document.createTextNode(_url));
+        cell.appendChild(attacha);
 
       } // for
 
