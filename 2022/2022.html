@@ -18,9 +18,6 @@
     <section class="section-header">
       <div class="innner">
         <h2 class="txt-cnt c1">Hello World. 2022</h2>
-        <span class="txt-cnt c2">
-          <p>このサイトは<a href="https://twitter.com/fumijp28i" target="_blank"><b>@fumijp28i</b></a>によって作られています。</p>
-        </span>
       </div>
     </section>
   </header>
@@ -33,7 +30,13 @@
         <div id="map"></div>
         <section class="mapconfig">
           <div class="inner-wrap">
-            <div class="cfg-wrap cfg-btn">
+            <section class="cfg-wrap cfg-zoom">
+              <div class="item-frame">
+                <span id="currentValue"></span>
+                <input type="range" id="zoomSlider" min="4" max="20" step="1" value="14">
+              </div>
+            </section>
+            <section class="cfg-wrap cfg-btn">
               <div class="item-frame">
                 <button id="resetmap" class="btn type-int" type="button" name="button" onclick="resetMap();">
                   <span>地図を<i class="_blank"></i>初期化</span>
@@ -54,8 +57,15 @@
                   <span><b>富山駅</b>を<i class="_blank"></i>中心に表示</span>
                 </button>
               </div>
-            </div>
-            <div class="cfg-wrap cfg-chk">
+            </section>
+            <section class="cfg-wrap cfg-chk">
+              <div class="item-frame">
+                <label for="tgliw">
+                  <input type="checkbox" id="tgliw" class="checkbox" checked="checked" />
+                  <label class="switch" for="tgliw"></label>
+                  <label class="text" for="tgliw"><span class="tgl-txt">ふきだし</span></label>
+                </label>
+              </div>
               <div class="item-frame">
                 <label for="showstc">
                   <input type="checkbox" id="showstc" class="checkbox" checked="checked" />
@@ -84,13 +94,13 @@
                   <label class="text" for="showhtl"><span class="tgl-txt">ホテル</span></label>
                 </label>
               </div>
-            </div>
+            </section>
           </div>
         </section>
       </section>
-      <section class="main-2 innner info">
+      <section class="main-2 inner info">
         <h2>Info</h2>
-        <div id="node"></div>
+        <section id="node-info"></section>
       </section>
       <section class="main-3 inner db">
         <h2>Databases</h2>
