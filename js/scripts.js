@@ -416,10 +416,12 @@ nodeJSON()
 
         cell = tr.insertCell();
         cell.className = "node-url";
-        attacha.href = "https://" + _url;
-        attacha.setAttribute("target", "_blank") ;
-        attacha.appendChild(document.createTextNode(_url));
-        cell.appendChild(attacha);
+        if (_url !== "") {
+          attacha.href = "https://" + _url;
+          attacha.setAttribute("target", "_blank") ;
+          attacha.appendChild(document.createTextNode(_url));
+          cell.appendChild(attacha);
+        }
 
       } // for
 
