@@ -28,6 +28,27 @@
       <section class="main-1 inner map">
         <h2>Google Map</h2>
         <div id="map"></div>
+        <section class="mapconfig">
+          <div class="inner-wrap">
+            <section class="cfg-wrap cfg-btn">
+              <div class="item-frame">
+                <button id="resetmap" class="btn type-int" type="button" name="button" onclick="resetMap();">
+                  <span>地図を<i class="_blank"></i>初期化</span>
+                </button>
+              </div>
+              <div class="item-frame">
+                <button id="setkanazawatocenter" class="btn type-int" type="button" name="button" onclick="setPluscodeAsCenter(kanazawaSta);">
+                  <span><b>金沢駅</b>を<i class="_blank"></i>中心に表示</span>
+                </button>
+              </div>
+              <div class="item-frame">
+                <button id="settoyamatocenter" class="btn type-int" type="button" name="button" onclick="setPluscodeAsCenter(toyamaSta);">
+                  <span><b>富山駅</b>を<i class="_blank"></i>中心に表示</span>
+                </button>
+              </div>
+            </section>
+          </div>
+        </section>
       </section>
       <section class="main-3 inner db">
         <h2>Databases</h2>
