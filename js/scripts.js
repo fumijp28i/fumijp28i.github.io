@@ -22,7 +22,8 @@ const mapOpts = {
   mapId: mapID, // MapIDの使用
   mapTypeControl: false, // マップ切り替えのコントロールを表示するかどうか
   streetViewControl: true, // ストリートビューのコントロールを表示するかどうか
-  gestureHandling: 'greedy' // ズーム設定
+  gestureHandling: 'greedy', // ズーム設定
+  zoomControl: false
 };
 
 
@@ -198,6 +199,7 @@ textureMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
 };
 
 
+
 // Pluscodeをエンコードするための関数
 function putMarkers() {
   nodeJSON()
@@ -210,6 +212,8 @@ function putMarkers() {
           // i = 1にしているのは、取得しているJSONの[0]が表題で、0から取得開始するとエラーを起こすため
 
           let area = encodePluscode(n.values[i][4]);
+
+          let name = n.values[i][1];
 
           // Typeごとにマーカーを変えるための処理
           // stc eat drm htl
@@ -232,7 +236,9 @@ function putMarkers() {
           marker = new google.maps.Marker({
             map: map,
             position: area,
-            icon: img
+            title: name,
+            icon: img,
+            animation: google.maps.Animation.DROP
           });
 
           // 吹き出しの中身の文言を引数で送る
@@ -272,63 +278,93 @@ function attachMsg(marker, name, num, type) {
     '<div class="node-pkg">' +
       '<span class="pkg-txt type-' + type + '">' +
         '<span class="pkg-msg txt-num">' + num + '</span>' +
-        '<span class="pkg-msg txt-name">' + name + '</span>' +
+        '<h4 class="pkg-msg txt-name">' + name + '</h4>' +
       '</span>' +
     '</div>';
   // return contentStr;
 
   // もしTypeが「stc」なら、最初からピンを表示させておく
-  if (type === "stc") {
     iw = new google.maps.InfoWindow({
       content: contentStr
     }).open(map, marker);
-  } else {
-    // もしstc以外なら、クリックイベントを「一度だけ（=Once）」発火させ内容を表示させる
-    google.maps.event.addListenerOnce(marker, "click",
-      e => { // クリックイベント発火時、すでに「.open」かどうか判断
-        if (activeWindow !== undefined) {
-          activeWindow.close();
-        }
-        activeWindow = new google.maps.InfoWindow({
-          content: contentStr
-        }).open(map, marker);
+    map.panTo(new google.maps.LatLng(defaultCenter));
 
-        // その他の挙動
-        map.setZoom(15); // ズームする
-        map.panTo(
-          new google.maps.LatLng(e.latLng.lat(), e.latLng.lng())
-        ); // そのマーカーの座標をmap中心地としてセット
-      } // e
-    );
+    if (type !== "stc") {
+    // もしstc以外なら、クリックイベントを「一度だけ（=Once）」発火させ内容を表示させる
+      google.maps.event.addListenerOnce(marker, "click",
+        e => { // クリックイベント発火時、すでに「.open」かどうか判断
+          if (activeWindow !== undefined) {
+            activeWindow.close();
+          }
+          activeWindow = new google.maps.InfoWindow({
+            content: contentStr
+          }).open(map, marker);
+
+          // その他の挙動
+          map.setZoom(15); // ズームする
+          map.panTo(
+            new google.maps.LatLng(e.latLng.lat(), e.latLng.lng())
+          ); // そのマーカーの座標をmap中心地としてセット
+        } // e
+      );
   } // else
 } // /attachMsg
 
-function clickIW(e) {
 
+
+// ========== 正規表現を用いて全角を半角にするための関数 ==========//
+function convertHalfWidth(str) {
+  return str.value.replace(/[Ａ-Ｚａ-ｚ０-９！-～]/g, function(s){
+    return String.fromCharCode(s.charCodeAt(0)-0xFEE0);
+  });
 }
 
 
+// ========== async用の関数 ==========//
+async function encodeJSON(url) {
+  const opts = {
+    method: "GET", // *GET, POST, PUT, DELETE, etc.
+    mode: "cors", // no-cors, *cors, same-origin
+    cache: "default", // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: "same-origin", // include, *same-origin, omit
+    headers: {
+      "Content-Type": "application/json"
+    },
+    redirect: "follow", // manual, *follow, error
+    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    body: JSON.stringify() // 本文のデータ型は "Content-Type" ヘッダーと一致させる必要があります
+  }; // ヘッダー処理のためのopts
 
-function sendID(num, name, type, pluscode, url) {
-}
+  try {
+    const r = await fetch(url, opts);
+    if (!r.ok) { // レスポンスが!r.okだった場合
+      throw new Error("NG");
+      console.log("Responce Error");
+    } // if
 
+    const encodedJSON = await r.json();
+    return encodedJSON;
+
+  } catch(err) { // 例外処理
+    console.error(err);
+  } // catch(err)
+} // encodeJSON
 
 
 async function nodeJSON(url = fetchURL) {
-  // 既定のオプションには * が付いています
   const r = await fetch(url, {
-    method: 'GET', // *GET, POST, PUT, DELETE, etc.
-    mode: 'cors', // no-cors, *cors, same-origin
-    cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: 'same-origin', // include, *same-origin, omit
+    method: "GET", // *GET, POST, PUT, DELETE, etc.
+    mode: "cors", // no-cors, *cors, same-origin
+    cache: "default", // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: "same-origin", // include, *same-origin, omit
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     },
-    redirect: 'follow', // manual, *follow, error
-    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    redirect: "follow", // manual, *follow, error
+    referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     body: JSON.stringify() // 本文のデータ型は "Content-Type" ヘッダーと一致させる必要があります
   })
-  return r.json(); // JSON のレスポンスをネイティブの JavaScript オブジェクトに解釈
+  return r.json(); // JSON のレスポンスをネイティブのJavaScriptオブジェクトに解釈
 }
 
 // Databaseを作る
@@ -352,6 +388,9 @@ nodeJSON()
 
         // ノード生成の行程
         let tr = tdb.insertRow();
+        let attacha = document.createElement("a");
+
+        tr.id = "node-tr-" + a;
         tr.className = "node-tr-type-" + _type;
 
         let cell;
@@ -369,13 +408,20 @@ nodeJSON()
         cell.className = "node-site";
         cell.appendChild(document.createTextNode(_site));
 
+        /*
         cell = tr.insertCell();
         cell.className = "node-pluscode";
         cell.appendChild(document.createTextNode(_pluscode));
+        */
 
         cell = tr.insertCell();
         cell.className = "node-url";
-        cell.appendChild(document.createTextNode(_url));
+        if (_url !== "null") { // DBのURL欄が「
+          attacha.href = "https://" + _url;
+          attacha.setAttribute("target", "_blank") ;
+          attacha.appendChild(document.createTextNode(_url));
+          cell.appendChild(attacha);
+        }
 
       } // for
 
@@ -399,9 +445,11 @@ nodeJSON()
       th_cell.className = "th-node-site";
       th_cell.appendChild(document.createTextNode("住所"));
 
+      /*
       th_cell = th_row.insertCell();
       th_cell.className = "th-node-pluscode";
       th_cell.appendChild(document.createTextNode("Pluscode"));
+      */
 
       th_cell = th_row.insertCell();
       th_cell.className = "th-node-url";
@@ -445,3 +493,55 @@ function tglStc() {
     }
   }
 } // tglStc
+
+
+
+// ========== 顔文字ランダム表示のための関数 ========== //
+function emojiRandom() {
+  let emoji = ["😀", "😂", "😕", "🧐", "🥰", "😅", "😎", "😊", "🥺", "😆"];
+  let txt = emoji[Math.floor(Math.random() * emoji.length)]; // 配列からランダムに表示
+
+  const place = document.getElementById("node-info");
+
+  let div = document.createElement("div");
+  let span = document.createElement("span");
+  let i = document.createElement("i");
+
+  div.className = "info-noselect";
+  span.className = "node-info-txt";
+  i.className = "node-i-emoji";
+
+  let textNode = document.createTextNode(txt);
+  i.appendChild(textNode);
+  span.appendChild(i);
+  div.appendChild(span);
+  place.appendChild(div);
+
+  let plzSelect = document.createTextNode("Nothing Selected");
+  span.appendChild(plzSelect);
+  div.appendChild(span);
+  place.appendChild(div);
+}
+emojiRandom();
+
+
+
+// ========== ズームスライダのための関数 ========== //
+const zoomSlider = document.getElementById("zoomSlider");
+const currentValue = document.getElementById("currentValue");
+const setCurrentValue = (val) => {
+  currentValue.innerText = val;
+}
+
+function rangeOnChange(e) {
+  setCurrentValue(e.target.value);
+}
+
+function zoomSliderListener() {
+  zoomSlider.addEventListener("change", rangeOnChange());
+}
+
+window.onload = () => {
+  zoomSliderListener();
+  setCurrentValue(zoomSlider.value);
+}
