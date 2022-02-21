@@ -1,7 +1,13 @@
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+}
+
 h1, h2, h3 {
-  padding-bottom: 4rem;
+  font-family: 'Readex Pro', sans-serif;
   position: relative;
+  display: block;
   text-transform: uppercase;
+  text-align: center;
 }
 
 h1 {

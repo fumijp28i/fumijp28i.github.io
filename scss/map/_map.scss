@@ -8,6 +8,7 @@ $colour_htl: #FF7043;
   width: 100%;
   height: 70vh;
   margin: 4vh auto;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.26);
 
   .node-pkg {
     position: relative;
@@ -97,7 +98,7 @@ $colour_htl: #FF7043;
     border-right: 2px $colour_stc dotted;
   }
 
-  .node-tr-type-stc:last-of-type {
+  .node-tr-type-stc:last-child {
     border-bottom: 3px rgba($colour_stc, 0.6) dotted;
   }
 
@@ -105,7 +106,7 @@ $colour_htl: #FF7043;
     border-right: 2px $colour_eat dotted;
   }
 
-  .node-tr-type-eat:last-of-type {
+  .node-tr-type-eat:last-child {
     border-bottom: 3px rgba($colour_eat, 0.6) dotted;
   }
 
@@ -113,7 +114,7 @@ $colour_htl: #FF7043;
     border-right: 2px $colour_drm dotted;
   }
 
-  .node-tr-type-drm:last-of-type {
+  .node-tr-type-drm:last-child {
     border-bottom: 3px rgba($colour_drm, 0.6) dotted;
   }
 
@@ -121,12 +122,16 @@ $colour_htl: #FF7043;
     border-right: 2px $colour_htl dotted;
   }
 
-  .node-tr-type-htl:last-of-type {
+  .node-tr-type-htl:last-child {
     border-bottom: 3px rgba($colour_htl, 0.6) dotted;
   }
 
+  tr:last-child {
+    border-bottom: none;
+  }
 
-}
+
+} // .tdb
 
 
 
@@ -145,8 +150,8 @@ $colour_htl: #FF7043;
     text-decoration: none;
     border: 2px $colour_int dotted;
     background-color: #FDFDFA;
-    box-shadow: 2px 2px 4px rgba($colour_int, 0.3);
-    width: calc(100% / 2 - 2em);
+    box-shadow: 2px 2px rgba($colour_int, 0.3);
+    width: calc(98% / 2 - 2em);
     float: left;
   }
 
@@ -233,7 +238,6 @@ $colour_htl: #FF7043;
   width: calc(100% / 2 - 32px);
   margin: 0 auto;
   font-weight: bold;
-  color: #464E70;
 }
 
 .cfg-chk {
@@ -274,6 +278,18 @@ $colour_htl: #FF7043;
     display: none;
   }
 }
+
+#tgliw {
+  &:checked ~ .switch:before {
+    background: lighten($colour_int, 30%);
+    border-color: lighten($colour_int, 20%);
+  }
+
+  &:checked ~ .switch:after {
+    background: $colour_int;
+    left: -2.1em;
+  }
+} // #showstc
 
 #showstc {
   &:checked ~ .switch:before {
@@ -322,3 +338,19 @@ $colour_htl: #FF7043;
     left: -2.1em;
   }
 } // #showstc
+
+
+.info {
+  .info-noselect {
+    margin: 4vh auto;
+    text-align: center;
+  }
+
+  .node-info-txt {
+    font-size: 4em;
+  }
+
+  .node-i-emoji {
+    font-style: normal;
+  }
+}

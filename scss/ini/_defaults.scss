@@ -57,22 +57,43 @@ body {
 }
 
 a {
-  color: transparent;
-  background-image: -webkit-linear-gradient(right, #777dff 0px, #f154ff 200px, #f0357c 400px),-webkit-linear-gradient(left, #777dff 0px, #497ce2 200px, #37bdde 400px);
-  background-image: linear-gradient(to left, #777dff 0px, #f154ff 200px, #f0357c 400px),linear-gradient(to right, #777dff 0px, #497ce2 200px, #37bdde 400px);
-  background-size: 50% 100%;
-  background-position: top left, top right;
-  background-repeat: no-repeat;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   text-decoration: none;
+  display: inline-block;
+  position: relative;
+  color: #cf1c47;
+  padding: 0.4rem;
+  transition: 0.3s;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: lighten(#cf1c47, 20%);
+
+    /*
+    background-image: -webkit-linear-gradient(right, #777dff 0px, #f154ff 200px, #f0357c 400px),-webkit-linear-gradient(left, #777dff 0px, #497ce2 200px, #37bdde 400px);
+    background-image: linear-gradient(to left, #777dff 0px, #f154ff 200px, #f0357c 400px),linear-gradient(to right, #777dff 0px, #497ce2 200px, #37bdde 400px);
+    background-size: 50% 100%;
+    background-position: top left, top right;
+    background-repeat: no-repeat;
+    */
+  }
+
+  /* &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    transition: 0.3s;
+  }
+
+  &:hover::after {
+    width: 100%;
+  } */
 }
 
-a:hover {
-  cursor: pointer;
-  color: #4688F1;
-  text-decoration: none;
-}
 
 b {
   color: transparent;
