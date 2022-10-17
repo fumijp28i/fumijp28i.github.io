@@ -59,10 +59,13 @@
   margin: calc(100vh/100) auto;
 }
 
+.face {
+  margin-bottom: calc(100vh/10);
+}
+
 .bio {
   h1 {
     font-size: calc(2rem + 4px);
-    text-align: left;
   }
 
   p {
