@@ -204,6 +204,7 @@ body a {
 
 
 header, main, footer {
+  margin: calc(100vh/100) auto;
   padding: 0 20%;
 }
 
@@ -211,6 +212,10 @@ header, main, footer {
   header,main,footer {
       padding: 0 10%;
     }
+}
+
+footer {
+  padding: 10vh 10vw;
 }
 
 
