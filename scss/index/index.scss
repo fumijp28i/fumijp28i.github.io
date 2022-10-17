@@ -48,6 +48,12 @@
   margin: 0 auto;
 }
 
+@media screen and (max-width: 768px) {
+  #icon {
+    height: 80vw;
+  }
+}
+
 .inner {
   margin: calc(100vh/100) auto;
 }
