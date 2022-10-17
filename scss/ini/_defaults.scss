@@ -207,6 +207,12 @@ header, main, footer {
   padding: 0 20%;
 }
 
+@media screen and (max-width: 768px) {
+  header,main,footer {
+      padding: 0 10%;
+    }
+}
+
 
 ::selection {
   background: #dbecf0;
