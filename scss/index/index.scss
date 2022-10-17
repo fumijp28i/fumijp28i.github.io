@@ -61,13 +61,12 @@
 
 .bio {
   h1 {
-    font-size: 2rem;
+    font-size: calc(2rem + 4px);
     text-align: left;
   }
 
   p {
     line-height: 1.6rem;
-
   }
 }
 
