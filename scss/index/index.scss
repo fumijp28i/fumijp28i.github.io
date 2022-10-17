@@ -32,6 +32,9 @@
   -webkit-text-fill-color: transparent;
 }
 
+.container {
+  margin: 1rem 0 0 0;
+}
 
 #icon {
   display: block;
@@ -43,17 +46,27 @@
   height: 500px;
   width: 500px;
   margin: 0 auto;
+}
 
+.inner {
+  margin: calc(100vh/100) auto;
 }
 
 .bio {
+  h1 {
+    font-size: 2rem;
+    text-align: left;
+  }
 
+  p {
+    line-height: 1.6rem;
+
+  }
 }
 
 .permlink {
   li {
     list-style: none;
-    margin: 0 0 2rem 0;
-    padding: 8px;
+    margin: 0 0 1rem 0;
   }
 }

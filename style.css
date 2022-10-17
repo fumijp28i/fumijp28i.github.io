@@ -187,7 +187,7 @@ legend {
 
 /* ========== defaults.scss ========== */
 html {
-  font: 400 62.5%/16px "Roboto Slab", "Lato", "Avenir", "Noto Sans JP", "Noto Sans CJK JP", "游ゴシック", "Yu Gothic", YuGothic, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "Roboto", SegoeUI, "Segoe UI", Verdana, "メイリオ", Meiryo, "Ubuntu", "Droid Sans", sans-serif;
+  font: 400 100% "Lato", "Avenir", "Noto Sans JP", "Noto Sans CJK JP", "游ゴシック", "Yu Gothic", YuGothic, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "Roboto", SegoeUI, "Segoe UI", Verdana, "メイリオ", Meiryo, "Ubuntu", "Droid Sans", sans-serif;
   scroll-behavior: smooth;
   background-color: #f6f6f4;
   color: #525252;
@@ -254,7 +254,6 @@ a {
   display: inline-block;
   position: relative;
   color: #cf1c47;
-  padding: 0.4rem;
   transition: 0.3s;
   /* &::after {
     content: "";
@@ -386,7 +385,7 @@ body a {
   color: #039BE5;
   cursor: pointer;
   display: inline-block;
-  font: 400 12px/20px "Roboto Slab", "Lato", "Avenir", "Noto Sans JP", "Noto Sans CJK JP", "游ゴシック", "Yu Gothic", YuGothic, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "Roboto", SegoeUI, "Segoe UI", Verdana, "メイリオ", Meiryo, "Ubuntu", "Droid Sans", sans-serif;
+  font: 400 12px/20px "Lato", "Avenir", "Noto Sans JP", "Noto Sans CJK JP", "游ゴシック", "Yu Gothic", YuGothic, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "Roboto", SegoeUI, "Segoe UI", Verdana, "メイリオ", Meiryo, "Ubuntu", "Droid Sans", sans-serif;
   height: 36px;
   margin: 0;
   min-width: 36px;
@@ -425,6 +424,13 @@ button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+}
+
+img.emoji {
+  height: 1em;
+  width: 1em;
+  margin: 0 0.05em 0 0.1em;
+  vertical-align: -0.1em;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -522,6 +528,10 @@ h3 {
   -webkit-text-fill-color: transparent;
 }
 
+.container {
+  margin: 1rem 0 0 0;
+}
+
 #icon {
   display: block;
   background-color: transparent;
@@ -534,10 +544,21 @@ h3 {
   margin: 0 auto;
 }
 
+.inner {
+  margin: 1vh auto;
+}
+
+.bio h1 {
+  font-size: 2rem;
+  text-align: left;
+}
+.bio p {
+  line-height: 1.6rem;
+}
+
 .permlink li {
   list-style: none;
-  margin: 0 0 2rem 0;
-  padding: 8px;
+  margin: 0 0 1rem 0;
 }
 
 #map {
