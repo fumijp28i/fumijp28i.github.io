@@ -56,7 +56,8 @@
 }
 
 .inner {
-  margin-bottom: calc(100vh/80) auto;
+  padding: 2vh 0;
+  margin-bottom: calc(calc(100vh/50) + 36px);
 }
 
 .face {
@@ -65,31 +66,57 @@
 
 .bio {
   p {
-    line-height: 1.6rem;
+    line-height: 3.2rem;
   }
 }
 
 .permlink {
-  li {
-    list-style: none;
-    margin: 0 0 1rem 0;
+  ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
+
+    li {
+    width: 30%;
+    list-style: none;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 768px) {
+    ul {
+      flex-direction: column;
+    }
+    
+    li {
+      margin-bottom: 1rem;
+      width: 100%;
+    }
+  } // media
 }
 
 .works {
   h3 {
-    font-size: 2rem;
+    font-size: calc(2rem - 8px);
+    color: #848484;
+    text-align: right;
+
+    &::before {
+      content: "▷";
+      font-size: 80%;
+      margin-right: calc(1rem - 12px);
+    }
   }
 }
 
 .box {
-  margin-bottom: calc(100vh/70);
+  margin-bottom: calc(calc(100vh/60) + 36px);
 }
 
 
 .svg-musicwave {
   svg {
-    width: 10%;
+    width: 10vw;
     display: block;
     margin: 0 auto;
   }
