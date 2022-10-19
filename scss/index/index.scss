@@ -82,10 +82,14 @@
     width: 30%;
     list-style: none;
     text-align: center;
+    margin: 0 12px;
 
     a {
       height: 100%;
       width: 100%;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 
